@@ -1,28 +1,28 @@
 services:
-  # Backend Service (Node.js)
+  # Backend Service (Node.js WebSocket Server)
   - type: web
     name: chat-backend
     env: node
-    buildCommand: |
-      cd backend
-      npm ci
     rootDir: backend
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
     envVars:
       - key: PORT
         value: 10000
       - key: NODE_ENV
         value: production
-    plan: free
-    startCommand: npm start
 
-  # Frontend Service (Static Site)
-  - type: static_site
+  # Frontend Service (React + Vite)
+  - type: web  # 🔁 fixed: was static_site
     name: chat-frontend
+    env: static  # this tells Render it's a static site
+    rootDir: frontend
+    plan: free
     buildCommand: |
-      cd frontend
       npm ci
       npm run build
-    outputDir: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://chat-backend.onrender.com
