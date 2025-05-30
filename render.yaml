@@ -14,9 +14,9 @@ services:
         value: production
 
   # Frontend Service (React + Vite)
-  - type: web  # 🔁 fixed: was static_site
+  - type: web  # ✅ must be "web"
     name: chat-frontend
-    env: static  # this tells Render it's a static site
+    env: static  # ✅ tells Render this is a static site
     rootDir: frontend
     plan: free
     buildCommand: |
