@@ -3,29 +3,33 @@ services:
   - type: web
     name: chat-backend
     env: node
-    build:
-      command: |
-        cd backend
-        npm install
-      publish: backend
+    buildCommand: |
+      cd backend
+      npm ci
+    rootDir: backend
     envVars:
       - key: PORT
         value: 10000
+      - key: NODE_ENV
+        value: production
     plan: free
+    startCommand: cd backend && npm start
 
   # Frontend Service
   - type: web
     name: chat-frontend
     env: node
-    build:
-      command: |
-        cd frontend
-        npm install
-        npm run build
-      publish: frontend/dist
+    buildCommand: |
+      cd frontend
+      npm ci
+      npm run build
+    rootDir: frontend
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://chat-backend.onrender.com
+      - key: NODE_ENV
+        value: production
     routes:
       - type: rewrite
         source: /*
