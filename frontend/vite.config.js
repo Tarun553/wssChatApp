@@ -15,11 +15,6 @@ export default defineConfig(({ mode }) => {
   
   return {
     plugins: [react(), tailwindcss()],
-    build: {
-      outDir: 'dist',
-      emptyOutDir: true,
-      sourcemap: false
-    },
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
@@ -43,6 +38,7 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: 'dist',
       emptyOutDir: true,
+      sourcemap: false,
       target: 'esnext',
       commonjsOptions: {
         transformMixedEsModules: true,
