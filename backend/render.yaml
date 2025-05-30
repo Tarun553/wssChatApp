@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: chat-backend
+    env: node
+    build:
+      command: npm install
+      publish: .
+    envVars:
+      - key: PORT
+        value: 10000
+    plan: free
