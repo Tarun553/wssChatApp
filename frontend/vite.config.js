@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import process from 'process'
 
 // Get the directory name in ES module
 const __filename = fileURLToPath(import.meta.url)
@@ -11,7 +12,7 @@ const __dirname = path.dirname(__filename)
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
-  const env = loadEnv(mode, path.resolve(__dirname, '..'), '');
+  const env = loadEnv(mode, process.cwd(), '');
   
   return {
     plugins: [react(), tailwindcss()],
