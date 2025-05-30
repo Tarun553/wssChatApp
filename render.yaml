@@ -16,17 +16,21 @@ services:
     startCommand: npm start
 
   # Frontend Service (Static Site)
-  - type: static_site
+  - type: web
     name: chat-frontend
+    env: static
     buildCommand: |
       cd frontend
       npm ci
       npm run build
-    rootDir: frontend
-    outputDir: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://chat-backend.onrender.com
       - key: NODE_ENV
         value: production
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     plan: free
