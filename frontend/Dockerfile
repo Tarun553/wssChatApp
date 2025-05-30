@@ -1,12 +1,13 @@
 # Build stage
-FROM node:18-alpine AS build
+FROM node:18.20.3-alpine AS build
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies with verbose output
-RUN npm install --loglevel verbose
+# Install dependencies with legacy peer deps
+RUN npm config set legacy-peer-deps true
+RUN npm install --legacy-peer-deps
 
 # Copy application code
 COPY . .
