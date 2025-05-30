@@ -9,9 +9,12 @@ import process from 'process'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
   // Load env file based on `mode` in the current working directory.
   const env = loadEnv(mode, process.cwd(), '');
+  
+  // Set NODE_ENV based on command (build/serve)
+  process.env.NODE_ENV = command === 'build' ? 'production' : process.env.NODE_ENV || 'development';
   
   return {
     plugins: [react(), tailwindcss()],
