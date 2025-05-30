@@ -1,11 +1,2 @@
-services:
-  - type: web
-    name: chat-backend
-    env: node
-    build:
-      command: npm install
-      publish: .
-    envVars:
-      - key: PORT
-        value: 10000
-    plan: free
+# This file is not needed since we're using the root render.yaml
+# All configuration is now in the root directory's render.yaml file
